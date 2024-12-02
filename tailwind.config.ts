@@ -110,7 +110,9 @@ export default {
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
-  			},
+  			},			
+  			cardCustomGray: 'hsl(215 13.8% 34.1%)',
+  			cardCustomBlue: 'hsl(221.2 83.2% 53.3%)',
   			'color-1': 'hsl(var(--color-1))',
   			'color-2': 'hsl(var(--color-2))',
   			'color-3': 'hsl(var(--color-3))',
