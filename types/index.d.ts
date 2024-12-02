@@ -12,6 +12,11 @@ declare type User = {
   // ssn: string;
 };
 
+declare type BreadCrumb = {
+  label: string;
+  href?: string;
+}
+
 declare interface SidebarProps {
   user: User;
 }
@@ -21,4 +26,8 @@ declare interface TitleBoxProps {
   title: string;
   subtext: string;
   user?: string;
+}
+
+declare interface BreadCrumbProps {
+  steps: BreadCrumb[];
 }
