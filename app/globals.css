@@ -194,6 +194,11 @@
     @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-7 xl:max-h-screen xl:overflow-y-scroll;
   }
 
+  /* Breadcrumbs */
+  .breadcrumbs {
+    @apply px-2 py-3;
+  }
+
   /* Header Box */
   .title-box {
     @apply flex flex-col gap-1;
