@@ -1,3 +1,4 @@
+import { HomeAnimatedBeam } from "@/components/HomeAnimatedBeam";
 import HyperText from "@/components/ui/hyper-text";
 import React from "react";
 
@@ -13,7 +14,9 @@ const Home = () => {
           Welcome to the BMS Monitoring Tool
         </p>
       </div>
-      <div className="flex justify-center w-full">Home animated beam</div>
+      <div className="flex justify-center w-full">
+        <HomeAnimatedBeam />
+      </div>
     </section>
   );
 };
