@@ -51,7 +51,7 @@ declare type Brand = {
   url: string;
 }
 
-declare type SupportedGateway ={
+declare type SupportedGateway = {
   id: number;
   name: string;
   logo: string;
@@ -71,6 +71,11 @@ declare type Device = {
   points: string[];
   supportedGateways: string[];
   supportedProtocols: string[];
+}
+
+declare interface SignInProps {
+  email: string;
+  password: string;
 }
 
 declare interface SidebarProps {
