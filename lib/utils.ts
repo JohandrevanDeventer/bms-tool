@@ -1,9 +1,15 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { z } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export const authFormSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
 
 // Fetch function with enhanced error handling
 async function getDBData(category: string): Promise<any[]> {
@@ -167,3 +173,4 @@ export const getSupportedProtocols = (devices: Device[], deviceType: string, bra
 export const getPointDetails = (pointName: string): Point | undefined => {
   return points.find((point) => point.name === pointName);
 }
+
