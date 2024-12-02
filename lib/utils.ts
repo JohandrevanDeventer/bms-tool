@@ -6,16 +6,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
+
 export const authFormSchema =(type: string) => z.object({
   // Sign-Up
   username: type === "sign-in" ? z.string().optional() : z.string().min(4),
   firstName: type === "sign-in" ? z.string().optional() : z.string().min(2),
   lastName: type === "sign-in" ? z.string().optional() : z.string().min(2),
-  idNumber: type === "sign-in" ? z.number().optional() : z.string().min(13),
+  idNumber: type === "sign-in" ? z.string().optional() : z.string().min(13),
   address1: type === "sign-in" ? z.string().optional() : z.string().min(2).max(50),
   city: type === "sign-in" ? z.string().optional() : z.string().min(2),
   province: type === "sign-in" ? z.string().optional() : z.string().min(4),
-  postalCode: type === "sign-in" ? z.number().optional() : z.string().min(4),
+  postalCode: type === "sign-in" ? z.string().optional() : z.string().min(4),
   dateOfBirth: type === "sign-in" ? z.string().optional() : z.string().min(10),
   // Both
   email: z.string().email(),
