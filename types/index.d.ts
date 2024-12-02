@@ -17,6 +17,47 @@ declare type BreadCrumb = {
   href?: string;
 }
 
+declare type Point = {
+  id: number;
+  name: string;
+  description: string;
+  unit: string;
+}
+
+declare type DeviceType = {
+  id: number;
+  name: string;
+}
+
+declare type Brand = {
+  id: number;
+  name: string;
+  logo: string;
+  url: string;
+}
+
+declare type SupportedGateway ={
+  id: number;
+  name: string;
+  logo: string;
+  url: string;
+}
+
+declare type SupportedProtocol = {
+  id: number;
+  name: string;
+}
+
+declare type Device = {
+  id: number;
+  deviceType: string;
+  brand: string;
+  model: string;
+  points: string[];
+  supportedGateways: string[];
+  supportedProtocols: string[];
+}
+
 declare interface SidebarProps {
   user: User;
 }
