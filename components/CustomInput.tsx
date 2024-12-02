@@ -7,9 +7,11 @@ import { authFormSchema } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { Eye, EyeOff } from "lucide-react";
 
+const formSchema = authFormSchema("sign-up");
+
 interface CustomInputProps {
-  control: Control<z.infer<typeof authFormSchema>>;
-  name: FieldPath<z.infer<typeof authFormSchema>>;
+  control: Control<z.infer<typeof formSchema>>;
+  name: FieldPath<z.infer<typeof formSchema>>;
   label: string;
   placeholder: string;
 }
@@ -38,7 +40,13 @@ const CustomInput = ({
                 <Input
                   placeholder={placeholder}
                   className="input-class"
-                  type={showPassword ? "text" : "password"}
+                  type={
+                    name === "password"
+                      ? showPassword
+                        ? "text"
+                        : "password"
+                      : "text"
+                  }
                   {...field}
                 />
                 {name === "password" && (
