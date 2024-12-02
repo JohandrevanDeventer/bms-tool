@@ -9,6 +9,7 @@ import {
 import HomeButton from "./HomeButton";
 import MainNav from "./MainSidebarNav";
 import { MainSidebarSettings } from "./MainSidebarSettings";
+import MainSidebarUser from "./MainSidebarUser";
 
 const MainSidebar = async ({ user, ...props }: SidebarProps) => {
   return (
@@ -25,10 +26,10 @@ const MainSidebar = async ({ user, ...props }: SidebarProps) => {
         <MainSidebarSettings />
       </SidebarFooter>
       <SidebarSeparator />
-      <SidebarFooter>Footer</SidebarFooter>
+      <SidebarFooter>
+        <MainSidebarUser user={user} />
+      </SidebarFooter>
       <SidebarRail className="my-20 border-primary" />
-      {/* Add any user-related content here if needed */}
-      <div>{user.firstName}</div>
     </Sidebar>
   );
 };
