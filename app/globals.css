@@ -201,7 +201,7 @@
 
   /* Header Box */
   .title-box {
-    @apply flex flex-col gap-1;
+    @apply flex flex-col gap-1 p-6;
   }
 
   .title-box-title {
