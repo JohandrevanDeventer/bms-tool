@@ -19,11 +19,11 @@ export const signIn = async ({email, password}: SignInProps) => {
 }
 
 export const signUp = async (userData: SignUpParams) => {
-    const { email, password, username } = userData;
+    const { email, password, firstName, lastName } = userData;
     try {
         const { account } = await createAdminClient();
 
-        const newUserAccount = await account.create(ID.unique(), email, password, username);
+        const newUserAccount = await account.create(ID.unique(), email, password, `${firstName} ${lastName}`);
         const session = await account.createEmailPasswordSession(email, password);
 
         cookies().set("appwrite-session", session.secret, {
@@ -49,4 +49,15 @@ export async function getLoggedInUser() {
   } catch (error) {
     return null;
   }
+}
+
+export const signOut = async () => {
+    try {
+        const { account } = await createSessionClient();
+        cookies.delete("appwrite-session");
+        await account.deleteSession("current");
+    } catch (error) {
+        console.error(error);
+        
+    }
 }
