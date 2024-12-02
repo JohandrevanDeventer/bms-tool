@@ -13,18 +13,19 @@ declare type SignUpParams = {
 };
 
 declare type User = {
-  // $id: string;
-  // email: string;
-  // userId: string;
-  // username: string;
+  $id: string;
+  email: string;
+  userId: string;
+  username: string;
   firstName: string;
   lastName: string;
-  // idNumber: string;
-  // address1: string;
-  // city: string;
-  // province: string;
-  // postalCode: string;
-  // dateOfBirth: string;
+  name: string;
+  idNumber: string;
+  address1: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  dateOfBirth: string;
 };
 
 declare type BreadCrumb = {
