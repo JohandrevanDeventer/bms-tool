@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { z } from "zod";
+import { set, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -12,8 +12,12 @@ import { authFormSchema } from "@/lib/utils";
 import CustomInput from "./CustomInput";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { sign } from "crypto";
+import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: { type: string }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +29,7 @@ const AuthForm = ({ type }: { type: string }) => {
       username: "",
       firstName: "",
       lastName: "",
-      IDNumber: "",
+      idNumber: "",
       address1: "",
       city: "",
       province: "",
@@ -36,11 +40,28 @@ const AuthForm = ({ type }: { type: string }) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values);
-    setLoading(false);
-  }
+
+    try {
+      if (type === "sign-up") {
+        const newUser = await signUp(data);
+        setUser(newUser);
+      }
+
+      if (type === "sign-in") {
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        });
+        if (response) router.push("/dashboard");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
@@ -87,7 +108,7 @@ const AuthForm = ({ type }: { type: string }) => {
 
                 <CustomInput
                   control={form.control}
-                  name="IDNumber"
+                  name="idNumber"
                   label="ID Number"
                   placeholder="Enter your ID number"
                 />
