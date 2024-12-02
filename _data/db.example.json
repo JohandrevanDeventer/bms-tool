@@ -1,0 +1,171 @@
+{
+    "points": [
+        {
+            "id": 1,
+            "name": "Point 1",
+            "description": "This is point 1",
+            "unit": ""
+        },
+        {
+            "id": 2,
+            "name": "Point 2",
+            "description": "This is point 2",
+            "unit": "m"
+        },
+        {
+            "id": 3,
+            "name": "Point 3",
+            "description": "This is point 3",
+            "unit": ""
+        },
+        {
+            "id": 4,
+            "name": "Point 4",
+            "description": "This is point 4",
+            "unit": "m"
+        }
+    ],
+    "alarms": [
+        {
+            "id": 1,
+            "name": "Alarm 1",
+            "description": "This is alarm 1",
+            "requiredPoints": [
+                "Point 1",
+                "Point 2"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Alarm 2",
+            "description": "This is alarm 2",
+            "requiredPoints": [
+                "Point 3",
+                "Point 4"
+            ]
+        }
+    ],
+    "deviceTypes": [
+        {
+            "id": 1,
+            "type": "Inverter"
+        },
+        {
+            "id": 2,
+            "type": "Power Meter"
+        }
+    ],
+    "brands": [
+        {
+            "id": 1,
+            "name": "Brand 1",
+            "logo": "brand1.png",
+            "url": "https://www.brand1.com"
+        },
+        {
+            "id": 2,
+            "name": "Brand 2",
+            "logo": "brand2.png",
+            "url": "https://www.brand2.com"
+        }
+    ],
+    "supportedGateways": [
+        {
+            "id": 1,
+            "name": "Gateway 1",
+            "logo": "gateway1.png",
+            "url": "https://www.gateway1.com"
+        },
+        {
+            "id": 2,
+            "name": "Gateway 2",
+            "logo": "gateway2.png",
+            "url": "https://www.gateway2.com"
+        }
+    ],
+    "supportedProtocols": [
+        {
+            "id": 1,
+            "name": "Modbus"
+        },
+        {
+            "id": 2,
+            "name": "BACnet"
+        }
+    ],
+    "devices": [
+        {
+        "id": 1,
+        "deviceType": "Inverter",
+        "brand": "Brand 1",
+        "model": "Model 1",
+        "points": [
+            "Point 1",
+            "Point 2"
+        ],
+        "supportedGateways": [
+            "Gateway 1",
+            "Gateway 2"
+        ],
+        "supportedProtocols": [
+            "Modbus",
+            "BACnet"
+        ]
+        },
+        {
+        "id": 2,
+        "deviceType": "Power Meter",
+        "brand": "Brand 2",
+        "model": "Model 2",
+        "points": [
+            "Point 3",
+            "Point 4"
+        ],
+        "supportedGateways": [
+            "Gateway 1",
+            "Gateway 2"
+        ],
+        "supportedProtocols": [
+            "Modbus",
+            "BACnet"
+        ]
+        },
+        {
+        "id": 3,
+        "deviceType": "Inverter",
+        "brand": "Brand 2",
+        "model": "Model 3",
+        "points": [
+            "Point 1",
+            "Point 2"
+        ],
+        "supportedGateways": [
+            "Gateway 1",
+            "Gateway 2"
+        ],
+        "supportedProtocols": [
+            "Modbus",
+            "BACnet"
+        ]
+        },
+        {
+        "id": 4,
+        "deviceType": "Inverter",
+        "brand": "Brand 1",
+        "model": "Model 4",
+        "points": [
+            "Point 3",
+            "Point 4"
+        ],
+        "supportedGateways": [
+            "Gateway 1",
+            "Gateway 2"
+        ],
+        "supportedProtocols": [
+            "Modbus",
+            "BACnet"
+        ]
+        }
+
+    ]
+}
