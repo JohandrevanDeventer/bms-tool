@@ -39,7 +39,7 @@ export function MainSidebarSettings() {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="min-w-56 rounded-lg"
+            className="min-w-56 rounded-lg shadow-[0px_4px_10px_rgba(0,0,0,0.1)] dark:shadow-[0px_4px_10px_rgba(0,150,255,0.3)]"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
