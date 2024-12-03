@@ -79,6 +79,10 @@ declare interface SignInProps {
   password: string;
 }
 
+declare interface getUserInfoProps {
+  userId: string;
+}
+
 declare interface SidebarProps {
   user: User;
 }
