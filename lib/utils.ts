@@ -41,8 +41,6 @@ async function getDBData(category: string): Promise<any[]> {
       throw new Error(`Invalid data format for ${category}: Expected an array`);
     }
 
-    console.log(`Fetched ${data.length} items for category "${category}"`);
-
     return data;
   } catch (error) {
     console.error(`Error fetching data for category "${category}":`, error);

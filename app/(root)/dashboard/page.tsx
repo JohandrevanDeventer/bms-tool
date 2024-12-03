@@ -9,7 +9,7 @@ const DashboardPage = async () => {
     { label: "Dashboard" }, // Current page doesn't need a link
   ];
 
-  const loggedIn = await getLoggedInUser();
+  const loggedInUser = await getLoggedInUser();
 
   return (
     <DashboardLayout breadcrumbSteps={breadcrumbSteps}>
@@ -17,7 +17,7 @@ const DashboardPage = async () => {
         <TitleBox
           type="greeting"
           title="Welcome"
-          user={loggedIn?.name || "Guest"}
+          user={loggedInUser?.name || "Guest"}
           subtext="Utility tool for Rubicon BMS monitoring systems"
         />
       </div>

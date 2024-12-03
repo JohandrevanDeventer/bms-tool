@@ -25,9 +25,18 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
+import { getLoggedInUser, signOut } from "@/lib/actions/user.actions";
+import { useRouter } from "next/navigation";
 
 const MainSidebarUser = ({ user }: SidebarProps) => {
   const { isMobile } = useSidebar();
+  const router = useRouter();
+
+  const handleLogOut = async () => {
+    const loggedOut = await signOut();
+
+    if (loggedOut) router.push("/sign-in");
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -38,13 +47,22 @@ const MainSidebarUser = ({ user }: SidebarProps) => {
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <Avatar>
-                  <Avatar>
-                    <AvatarFallback>
-                      {user.firstName[0]} {user.lastName[0].toUpperCase()}
+                <div className="flex cursor-pointer items-center justify-between gap-1 py-6">
+                  <Avatar className="size-8">
+                    <AvatarFallback className="font-bold bg-background text-secondary-foreground">
+                      {user?.firstName[0].toUpperCase()}
+                      {user?.lastName[0].toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                </Avatar>
+                  <div className="flex flex-col justify-center max-xl:hidden">
+                    <h1 className="text-sm truncate font-semibold max-w-[125px]">
+                      {user?.firstName} {user?.lastName}
+                    </h1>
+                    <p className="text-xs text-secondary-foreground truncate max-w-[125px]">
+                      {user?.email}
+                    </p>
+                  </div>
+                </div>
                 <ChevronsUpDown className="ml-auto size-4" />
               </SidebarMenuButton>
             ) : (
@@ -57,19 +75,24 @@ const MainSidebarUser = ({ user }: SidebarProps) => {
             align="end"
             sideOffset={4}
           >
-            <DropdownMenuLabel className="p-0 font-normal">
+            <DropdownMenuLabel className="p-0 font-semibold">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar>
-                  <AvatarFallback>
-                    {user.firstName[0]} {user.lastName[0].toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-
-                {/* <ClerkAvatar
-                  username={username}
-                  email={email}
-                  imageURL={imageURL}
-                /> */}
+                <div className="flex cursor-pointer items-center justify-between gap-1">
+                  <Avatar className="size-8">
+                    <AvatarFallback className="font-bold bg-background text-secondary-foreground">
+                      {user?.firstName[0].toUpperCase()}
+                      {user?.lastName[0].toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col justify-center max-xl:hidden">
+                    <h1 className="text-sm truncate font-normal">
+                      {user?.firstName} {user?.lastName}
+                    </h1>
+                    <p className="text-xs text-secondary-foreground truncate]">
+                      {user?.email}
+                    </p>
+                  </div>
+                </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -95,7 +118,7 @@ const MainSidebarUser = ({ user }: SidebarProps) => {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogOut}>
               <LogOut />
               Log out
             </DropdownMenuItem>

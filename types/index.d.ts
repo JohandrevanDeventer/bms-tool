@@ -1,13 +1,13 @@
 declare type SignUpParams = {
-  username?: string
-  firstName?: string;
-  lastName?: string;
-  idNumber?: string;
-  address1?: string;
-  city?: string;
-  province?: string;
-  postalCode?: string;
-  dateOfBirth?: string;
+  username: string
+  firstName: string;
+  lastName: string;
+  idNumber: string;
+  address1: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  dateOfBirth: string;
   email: string;
   password: string;
 };
@@ -88,6 +88,10 @@ declare interface TitleBoxProps {
   title: string;
   subtext: string;
   user?: string;
+}
+
+declare interface HeaderProps {
+  user: User;
 }
 
 declare interface BreadCrumbProps {

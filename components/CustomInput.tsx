@@ -14,6 +14,7 @@ interface CustomInputProps {
   name: FieldPath<z.infer<typeof formSchema>>;
   label: string;
   placeholder: string;
+  autocomplete?: string;
 }
 
 const CustomInput = ({
@@ -21,6 +22,7 @@ const CustomInput = ({
   name,
   label,
   placeholder,
+  autocomplete,
 }: CustomInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -47,6 +49,7 @@ const CustomInput = ({
                         : "password"
                       : "text"
                   }
+                  autoComplete={autocomplete}
                   {...field}
                 />
                 {name === "password" && (

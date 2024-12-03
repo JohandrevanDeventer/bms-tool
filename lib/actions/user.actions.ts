@@ -1,39 +1,77 @@
 "use server";
 
-import { ID } from "node-appwrite";
+import { AppwriteException, ID } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
 
-export const signIn = async ({email, password}: SignInProps) => {
-    try {
-        const { account } = await createAdminClient();
+const {
+  APPWRITE_DATABASE_ID: DATABASE_ID,
+  APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
+} = process.env;
 
-        const response = await account.createEmailPasswordSession(email, password);
+export const signIn = async ({ email, password }: SignInProps) => {
+  try {
+    const { account } = await createAdminClient();
 
-        return parseStringify(response);
-    } catch (error) {
-        console.error(error);
-        
+    const session = await account.createEmailPasswordSession(email, password);
+
+    const cookieStore = await cookies();
+    cookieStore.set("appwrite-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
+
+    return parseStringify(session);
+  } catch (error) {
+    if (error instanceof AppwriteException) {
+      if (error.message === "Invalid credentials. Please check the email and password.") {
+        throw new Error("Invalid email or password. Please try agains.");
+      } else {
+        throw new Error(`Appwrite error: ${error.message}`);
+      }
+    } else {
+      throw new Error("An unexpected error occurred. Please try again later.");
     }
-}
+  }
+};
 
-export const signUp = async (userData: SignUpParams) => {
-    const { email, password, firstName, lastName } = userData;
+export const signUp = async ({password, ...userData}: SignUpParams) => {
+    const { email, firstName, lastName } = userData;
+
+    let newUserAccount;
+
     try {
-        const { account } = await createAdminClient();
+        const { account, database } = await createAdminClient();
 
         const newUserAccount = await account.create(ID.unique(), email, password, `${firstName} ${lastName}`);
+
+        if(!newUserAccount) throw new Error("Failed to create user account");
+
+        const newUser = await database.createDocument(
+            DATABASE_ID!,
+            USER_COLLECTION_ID!,
+            ID.unique(),
+            {
+                ...userData,
+                userId: newUserAccount.$id,
+            }
+        );
+
+
         const session = await account.createEmailPasswordSession(email, password);
 
-        cookies().set("appwrite-session", session.secret, {
+        const cookieStore = await cookies();
+        cookieStore.set("appwrite-session", session.secret, {
             path: "/",
             httpOnly: true,
             sameSite: "strict",
             secure: true,
         });
 
-        return parseStringify(newUserAccount);
+        return parseStringify(newUser);
 
     } catch (error) {
         console.error(error);
@@ -54,10 +92,12 @@ export async function getLoggedInUser() {
 export const signOut = async () => {
     try {
         const { account } = await createSessionClient();
-        cookies.delete("appwrite-session");
+
+        const cookieStore = await cookies();
+        cookieStore.delete("appwrite-session");
         await account.deleteSession("current");
     } catch (error) {
         console.error(error);
-        
+        return null;
     }
 }

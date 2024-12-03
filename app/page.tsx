@@ -3,7 +3,6 @@ import HyperText from "@/components/ui/hyper-text";
 import React from "react";
 
 const Home = () => {
-  const loggedIn = { firstName: "Johandré", lastName: "van Deventer" };
   return (
     <section className="landing">
       <div className="text-5xl md:text-8xl font-bold pb-5">
