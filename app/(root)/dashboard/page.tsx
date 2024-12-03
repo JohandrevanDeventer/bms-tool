@@ -17,7 +17,9 @@ const DashboardPage = async () => {
         <TitleBox
           type="greeting"
           title="Welcome"
-          user={loggedInUser?.name || "Guest"}
+          user={
+            `${loggedInUser?.firstName} ${loggedInUser?.lastName}` || "Guest"
+          }
           subtext="Utility tool for Rubicon BMS monitoring systems"
         />
       </div>
